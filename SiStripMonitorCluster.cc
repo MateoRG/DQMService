@@ -115,7 +115,7 @@ SiStripMonitorCluster::SiStripMonitorCluster(const edm::ParameterSet& iConfig)
   edm::ParameterSet ParametersTotClusterProf = conf_.getParameter<edm::ParameterSet>("TProfTotalNumberOfClusters");
   subdetswitchtotclusprofon = ParametersTotClusterProf.getParameter<bool>("subdetswitchon");
 
-  edm::ParameterSet ParametersTotClusterProfLS = conf_.getParameter<edm::ParameterSet>("TProfTotalNumberOfClustersLS");
+  edm::ParameterSet ParametersTotClusterProfLS = conf_.getParameter<edm::ParameterSet>("TProfTotalNumberOfClustersLS"); //-//
   subdetswitchtotclusprofon = ParametersTotClusterProf.getParameter<bool>("subdetswitchon");
 
   edm::ParameterSet ParametersTotClusterTH1 = conf_.getParameter<edm::ParameterSet>("TH1TotalNumberOfClusters");
@@ -160,7 +160,7 @@ SiStripMonitorCluster::SiStripMonitorCluster(const edm::ParameterSet& iConfig)
 
   clustertkhistomapon = conf_.getParameter<bool>("TkHistoMap_On");
   createTrendMEs = conf_.getParameter<bool>("CreateTrendMEs");
-//  createTrendMEsLS = conf_.getParameter<bool>("CreateTrendMEsLS");
+//  createTrendMEsLS = conf_.getParameter<bool>("CreateTrendMEsLS"); //-//
   Mod_On_ = conf_.getParameter<bool>("Mod_On");
   ClusterHisto_ = conf_.getParameter<bool>("ClusterHisto");
 
@@ -315,35 +315,6 @@ void SiStripMonitorCluster::createMEs(const edm::EventSetup& es){
 	folder_organizer.setLayerFolder(detid,tTopo,det_layer_pair.second);
 	createLayerMEs(label, layerDetIds.size());
       }
-      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//      std::map<std::string, LayerMEsLS>::iterator iLayerMELS  = LayerMEsLSMap.find(label);
-  //    if(iLayerMELS==LayerMEsLSMap.end()) {
-
-        // get detids for the layer
-    //   int32_t lnumber = det_layer_pair.second;
-    //  	std::vector<uint32_t> layerDetIds;
-     //  if (det_layer_pair.first == "TIB") {
-     //     substructure.getTIBDetectors(activeDets,layerDetIds,lnumber,0,0,0);
-     //   } else if (det_layer_pair.first == "TOB") {
-     //     substructure.getTOBDetectors(activeDets,layerDetIds,lnumber,0,0);
-     //   } else if (det_layer_pair.first == "TID" && lnumber > 0) {
-     //    substructure.getTIDDetectors(activeDets,layerDetIds,2,abs(lnumber),0,0);
-     //   } else if (det_layer_pair.first == "TID" && lnumber < 0) {
-     //     substructure.getTIDDetectors(activeDets,layerDetIds,1,abs(lnumber),0,0);
-     //   } else if (det_layer_pair.first == "TEC" && lnumber > 0) {
-     //     substructure.getTECDetectors(activeDets,layerDetIds,2,abs(lnumber),0,0,0,0);
-//	    } else if (det_layer_pair.first == "TEC" && lnumber < 0) {
-  //      substructure.getTECDetectors(activeDets,layerDetIds,1,abs(lnumber),0,0,0,0);
-    //          }
-      //	LayerDetMap[label] = layerDetIds;
-
-	// book Layer MEs
-//      	folder_organizer.setLayerFolder(detid,tTopo,det_layer_pair.second);
-  //   	createLayerMEsLS(label, layerDetIds.size());
-    //  }
-      //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
       // book sub-detector plots
       std::pair<std::string,std::string> sdet_pair = folder_organizer.getSubDetFolderAndTag(detid, tTopo);
@@ -687,7 +658,7 @@ void SiStripMonitorCluster::analyze(const edm::Event& iEvent, const edm::EventSe
       if (layerswitchlocaloccupancy && found_layer_me && layer_single.LayerLocalOccupancy) {
 	fillME(layer_single.LayerLocalOccupancy,local_occupancy);
 	if (createTrendMEs) fillME(layer_single.LayerLocalOccupancyTrend,iOrbitSec,local_occupancy);
-	if (createTrendMEs) fillME(layer_single.LayerLocalOccupancyTrend,aLS,local_occupancy);//-//
+	if (createTrendMEs) fillME(layer_single.LayerLocalOccupancyTrendLS,aLS,local_occupancy);//-//
       }
     }
     std::map<std::string, SubDetMEs>::iterator iSubdet  = SubDetMEsMap.find(subdet_label);
@@ -749,7 +720,7 @@ void SiStripMonitorCluster::analyze(const edm::Event& iEvent, const edm::EventSe
 	  sdetmes.SubDetTotClusterProf->Fill(iOrbitSec,sdetmes.totNClusters);
 ////////////////////////////////////////////////////////////////////////////////////
       if (subdetswitchtotclusprofon)
-	  sdetmes.SubDetTotClusterProfLS->Fill(aLS,sdetmes.totNClusters);
+	  sdetmes.SubDetTotClusterProfLS->Fill(aLS,sdetmes.totNClusters);       //-//
 ////////////////////////////////////////////////////////////////////////////////////
       if (subdetswitchapvcycleprofon)
 	sdetmes.SubDetClusterApvProf->Fill(tbx_corr%70,sdetmes.totNClusters);
@@ -912,6 +883,7 @@ void SiStripMonitorCluster::createLayerMEs(std::string label, int ndets) {
   layerMEs.LayerClusterWidthTrendLS = 0;//-//
   layerMEs.LayerLocalOccupancy = 0;
   layerMEs.LayerLocalOccupancyTrend = 0;
+  layerMEs.LayerLocalOccupancyTrendLS = 0; //-//
   layerMEs.LayerNumberOfClusterProfile = 0;
   layerMEs.LayerClusterWidthProfile = 0;
 
@@ -946,8 +918,8 @@ if (createTrendMEs) layerMEs.LayerClusterWidthTrendLS=bookMETrendLS("TH1ClusterW
   //Cluster Occupancy
   if(layerswitchlocaloccupancy) {
     layerMEs.LayerLocalOccupancy=bookME1D("TH1ModuleLocalOccupancy", hidmanager.createHistoLayer("Summary_ClusterLocalOccupancy","layer",label,"").c_str());
-    if (createTrendMEs) layerMEs.LayerLocalOccupancyTrend=bookMETrend("TH1ModuleLocalOccupancy", hidmanager.createHistoLayer("Trend_ClusterLocalOccupancy","layer",label,"").c_str()); //-//
-
+    if (createTrendMEs) layerMEs.LayerLocalOccupancyTrend=bookMETrend("TH1ModuleLocalOccupancy", hidmanager.createHistoLayer("Trend_ClusterLocalOccupancy","layer",label,"").c_str());
+    if (createTrendMEs) layerMEs.LayerLocalOccupancyTrendLS=bookMETrendLS("TH1ModuleLocalOccupancy", hidmanager.createHistoLayer("Trend_ClusterLocalOccupancyLS","layer",label,"").c_str()); //-//
   }
 
   // # of Cluster Profile
@@ -1002,7 +974,8 @@ void SiStripMonitorCluster::createSubDetMEs(std::string label) {
     subdetMEs.SubDetTotClusterProf->setAxisTitle("Event Time (Seconds)",1);
     if (subdetMEs.SubDetTotClusterProf->kind() == MonitorElement::DQM_KIND_TPROFILE) subdetMEs.SubDetTotClusterProf->getTH1()->SetBit(TH1::kCanRebin);
   }
-  // Total Number of Cluster vs LS
+
+  // Total Number of Cluster vs LS //-// 
 
 if (subdetswitchtotclusprofon){
     edm::ParameterSet Parameters =  conf_.getParameter<edm::ParameterSet>("TProfTotalNumberOfClustersLS");
@@ -1152,7 +1125,7 @@ void SiStripMonitorCluster::fillLayerMEs(LayerMEs& layerMEs, ClusterProperties& 
 
 }
 
-// -- Fill Layer Level MEsLS   //-//
+// -- Fill Layer MesLS   //-//
 
 void SiStripMonitorCluster::fillLayerMEsLS(LayerMEs& layerMEs, ClusterProperties& cluster, float aLS) { 
   if(layerswitchclusstonon) {
@@ -1177,8 +1150,6 @@ void SiStripMonitorCluster::fillLayerMEsLS(LayerMEs& layerMEs, ClusterProperties
 
 }
 
-
-//------------------------------------------------------------------------------------------
 MonitorElement* SiStripMonitorCluster::bookMETrend(const char* ParameterSetLabel, const char* HistoName)
 {
   Parameters =  conf_.getParameter<edm::ParameterSet>(ParameterSetLabel);
@@ -1199,6 +1170,8 @@ MonitorElement* SiStripMonitorCluster::bookMETrend(const char* ParameterSetLabel
   return me;
 }
 
+
+//-//
 MonitorElement* SiStripMonitorCluster::bookMETrendLS(const char* ParameterSetLabel, const char* HistoName)
 {
   Parameters =  conf_.getParameter<edm::ParameterSet>(ParameterSetLabel);
