@@ -72,16 +72,18 @@ class SiStripMonitorCluster : public edm::EDAnalyzer {
     MonitorElement* LayerClusterWidthTrendLS = 0;//-//
     MonitorElement* LayerLocalOccupancy = 0;
     MonitorElement* LayerLocalOccupancyTrend = 0;
+    MonitorElement* LayerLocalOccupancyTrendLS = 0;//-//
     MonitorElement* LayerNumberOfClusterProfile = 0;
     MonitorElement* LayerClusterWidthProfile = 0;
 
   };
 
+
   struct SubDetMEs{ // MEs for Subdetector Level
     int totNClusters = 0; 
     MonitorElement* SubDetTotClusterTH1 = 0;
     MonitorElement* SubDetTotClusterProf = 0;
-    MonitorElement* SubDetTotClusterProfLS = 0; //n_n//
+    MonitorElement* SubDetTotClusterProfLS = 0;
     MonitorElement* SubDetClusterApvProf = 0;
     MonitorElement* SubDetClusterApvTH2 = 0;
     MonitorElement* SubDetClusterDBxCycleProf = 0;
