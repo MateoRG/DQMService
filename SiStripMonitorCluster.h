@@ -60,19 +60,19 @@ class SiStripMonitorCluster : public edm::EDAnalyzer {
   struct LayerMEs{ // MEs for Layer Level
     MonitorElement* LayerClusterStoN = 0;
     MonitorElement* LayerClusterStoNTrend = 0;
-    MonitorElement* LayerClusterStoNTrendLS = 0;//-//
+    MonitorElement* LayerClusterStoNTrendLS = 0;
     MonitorElement* LayerClusterCharge = 0;
     MonitorElement* LayerClusterChargeTrend = 0;
-    MonitorElement* LayerClusterChargeTrendLS = 0;//-//
+    MonitorElement* LayerClusterChargeTrendLS = 0;
     MonitorElement* LayerClusterNoise = 0;
     MonitorElement* LayerClusterNoiseTrend = 0;
-    MonitorElement* LayerClusterNoiseTrendLS = 0;//-//
+    MonitorElement* LayerClusterNoiseTrendLS = 0;
     MonitorElement* LayerClusterWidth = 0;
     MonitorElement* LayerClusterWidthTrend = 0;
-    MonitorElement* LayerClusterWidthTrendLS = 0;//-//
+    MonitorElement* LayerClusterWidthTrendLS = 0;
     MonitorElement* LayerLocalOccupancy = 0;
     MonitorElement* LayerLocalOccupancyTrend = 0;
-    MonitorElement* LayerLocalOccupancyTrendLS = 0;//-//
+    MonitorElement* LayerLocalOccupancyTrendLS = 0;
     MonitorElement* LayerNumberOfClusterProfile = 0;
     MonitorElement* LayerClusterWidthProfile = 0;
 
@@ -125,11 +125,11 @@ class SiStripMonitorCluster : public edm::EDAnalyzer {
 
   inline void fillME(MonitorElement* ME,float value1){if (ME!=0)ME->Fill(value1);}
 //inline void fillME(MonitorElement* ME,float value1,float value2){if (ME!=0)ME->Fill(value1,value2);}   
-  inline void fillME(MonitorElement* ME,float value1,float value2){if (ME!=0)ME->Fill(value1,value2);}    ///////////eletrico
+  inline void fillME(MonitorElement* ME,float value1,float value2){if (ME!=0)ME->Fill(value1,value2);}    
   inline void fillME(MonitorElement* ME,float value1,float value2,float value3){if (ME!=0)ME->Fill(value1,value2,value3);}
   inline void fillME(MonitorElement* ME,float value1,float value2,float value3,float value4){if (ME!=0)ME->Fill(value1,value2,value3,value4);}
   MonitorElement * bookMETrend(const char*, const char*);
-  MonitorElement * bookMETrendLS(const char*, const char*); //-//
+  MonitorElement * bookMETrendLS(const char*, const char*); 
   MonitorElement* bookME1D(const char* ParameterSetLabel, const char* HistoName);
 
  private:
@@ -185,6 +185,7 @@ class SiStripMonitorCluster : public edm::EDAnalyzer {
   bool moduleswitchlocaloccupancy;
   bool moduleswitchnrclusterizedstrip;
   bool subdetswitchtotclusprofon;
+  bool subdetswitchtotclusprofonvsLS;
   bool subdetswitchapvcycleprofon;
   bool subdetswitchapvcycleth2on;
   bool subdetswitchapvcycledbxprof2on;
@@ -195,7 +196,7 @@ class SiStripMonitorCluster : public edm::EDAnalyzer {
   bool globalswitchMultiRegions;
   bool clustertkhistomapon;
   bool createTrendMEs;
-//  bool createTrendMEsLS; //-//
+  bool TrendsVsLS;
 
   bool Mod_On_;
   bool ClusterHisto_;
