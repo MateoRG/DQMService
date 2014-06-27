@@ -26,8 +26,8 @@ SiStripMonitorCluster = cms.EDAnalyzer("SiStripMonitorCluster",
     PixelDCSfilter = cms.PSet(),
     StripDCSfilter = cms.PSet(),
                                      
-    CreateTrendMEs = cms.bool(True),   #//-//
- #   CreateTrendMEsLS = cms.bool(True), #//-//
+    CreateTrendMEs = cms.bool(False),   
+    TrendsvsLS = cms.bool(False),     
     Trending = cms.PSet(
         Nbins = cms.int32(360),
         xmin = cms.double(0.0),
@@ -35,7 +35,7 @@ SiStripMonitorCluster = cms.EDAnalyzer("SiStripMonitorCluster",
         ymin = cms.double(0.0),
         ymax = cms.double(100000.0)
     ),
-    TrendingLS = cms.PSet(             #//-//
+    TrendingLS = cms.PSet(             
         Nbins = cms.int32(2400),
         xmin = cms.double(0.0),
         xmax = cms.double(150),
@@ -46,7 +46,7 @@ SiStripMonitorCluster = cms.EDAnalyzer("SiStripMonitorCluster",
         Nbinx          = cms.int32(20),
         xmin           = cms.double(-0.5),
         xmax           = cms.double(9.5),
-        layerswitchon  = cms.bool(True),#//-//
+        layerswitchon  = cms.bool(False),
         moduleswitchon = cms.bool(True)
     ),
 
@@ -89,7 +89,7 @@ SiStripMonitorCluster = cms.EDAnalyzer("SiStripMonitorCluster",
         Nbinx          = cms.int32(100),
         xmin           = cms.double(-0.5),
         xmax           = cms.double(299.5),
-        layerswitchon  = cms.bool(True),#//-//
+        layerswitchon  = cms.bool(False),
         moduleswitchon = cms.bool(True)
     ),
     TH1ClusterStoNVsPos = cms.PSet(
@@ -106,14 +106,14 @@ SiStripMonitorCluster = cms.EDAnalyzer("SiStripMonitorCluster",
         Nbinx          = cms.int32(200),
         xmin           = cms.double(-0.5),        
         xmax           = cms.double(799.5),
-        layerswitchon  = cms.bool(True),#//-//
+        layerswitchon  = cms.bool(False),
         moduleswitchon = cms.bool(True)
     ),
     TH1ClusterWidth = cms.PSet(
         Nbinx          = cms.int32(20),
         xmin           = cms.double(-0.5),
         xmax           = cms.double(19.5),
-        layerswitchon  = cms.bool(True),#//-//        
+        layerswitchon  = cms.bool(False),      
         moduleswitchon = cms.bool(True)
     ),
 
@@ -146,25 +146,22 @@ SiStripMonitorCluster = cms.EDAnalyzer("SiStripMonitorCluster",
         xmax = cms.double(1.0*60*60),
         ymin = cms.double(0.0),
         ymax = cms.double(0.0),
-        subdetswitchon = cms.bool(True) ##//-//
+        subdetswitchon = cms.bool(False) 
     ),
-#######################################################################################
-    TProfTotalNumberOfClustersLS = cms.PSet( #//-//
+    TProfTotalNumberOfClustersLS = cms.PSet( 
         Nbins = cms.int32(2400),
         xmin = cms.double(0.0),
         xmax = cms.double(150.0),
         ymin = cms.double(0.0),
         ymax = cms.double(0.0),
-        subdetswitchon = cms.bool(True)
+        subdetswitchon = cms.bool(False)
     ),
-######################################################################################
-
 
     TH1TotalNumberOfClusters = cms.PSet(
         Nbinx          = cms.int32(80),
         xmin           = cms.double(-0.5),
         xmax           = cms.double(15999.5),
-        subdetswitchon = cms.bool(False) #//-//
+        subdetswitchon = cms.bool(False)  
     ),
                                        
     TProfClustersApvCycle = cms.PSet(
