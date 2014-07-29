@@ -128,8 +128,7 @@ class SiStripMonitorCluster : public edm::EDAnalyzer {
   inline void fillME(MonitorElement* ME,float value1,float value2){if (ME!=0)ME->Fill(value1,value2);}    
   inline void fillME(MonitorElement* ME,float value1,float value2,float value3){if (ME!=0)ME->Fill(value1,value2,value3);}
   inline void fillME(MonitorElement* ME,float value1,float value2,float value3,float value4){if (ME!=0)ME->Fill(value1,value2,value3,value4);}
-  MonitorElement * bookMETrend(const char*, const char*);
-  MonitorElement * bookMETrendLS(const char*, const char*); 
+  MonitorElement * bookMETrend(const char*, const char*); 
   MonitorElement* bookME1D(const char* ParameterSetLabel, const char* HistoName);
 
  private:
