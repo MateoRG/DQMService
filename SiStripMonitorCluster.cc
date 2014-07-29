@@ -160,7 +160,7 @@ SiStripMonitorCluster::SiStripMonitorCluster(const edm::ParameterSet& iConfig)
 
   clustertkhistomapon = conf_.getParameter<bool>("TkHistoMap_On");
   createTrendMEs = conf_.getParameter<bool>("CreateTrendMEs");
-  TrendsVsLS = conf_.getParameter<bool>("TrendsvsLS");
+  TrendsVsLS = conf_.getParameter<bool>("TrendsVsLS");
   Mod_On_ = conf_.getParameter<bool>("Mod_On");
   ClusterHisto_ = conf_.getParameter<bool>("ClusterHisto");
 
@@ -657,8 +657,8 @@ void SiStripMonitorCluster::analyze(const edm::Event& iEvent, const edm::EventSe
       if (layerswitchlocaloccupancy && found_layer_me && layer_single.LayerLocalOccupancy) {
 	fillME(layer_single.LayerLocalOccupancy,local_occupancy);
 	if (createTrendMEs) {
-	   if (TrendsVsLS) fillME(layer_single.LayerLocalOccupancyTrend,iOrbitSec,local_occupancy);
-	   else fillME(layer_single.LayerLocalOccupancyTrendLS,aLS,local_occupancy);
+	   if (TrendsVsLS) fillME(layer_single.LayerLocalOccupancyTrendLS,aLS,local_occupancy);
+	   else fillME(layer_single.LayerLocalOccupancyTrend,iOrbitSec,local_occupancy);
 	}
       }
     }
@@ -890,8 +890,8 @@ void SiStripMonitorCluster::createLayerMEs(std::string label, int ndets) {
   if(layerswitchcluswidthon) {
     layerMEs.LayerClusterWidth=bookME1D("TH1ClusterWidth", hidmanager.createHistoLayer("Summary_ClusterWidth","layer",label,"").c_str());
     if (createTrendMEs) { 
-        if(TrendsVsLS) layerMEs.LayerClusterWidthTrend=bookMETrend("TH1ClusterWidth", hidmanager.createHistoLayer("Trend_ClusterWidth","layer",label,"").c_str());
-  	else layerMEs.LayerClusterWidthTrendLS=bookMETrendLS("TH1ClusterWidth", hidmanager.createHistoLayer("Trend_ClusterWidthvsLumisection","layer",label,"").c_str());
+        if(TrendsVsLS) layerMEs.LayerClusterWidthTrendLS=bookMETrend("TH1ClusterWidth", hidmanager.createHistoLayer("Trend_ClusterWidthvsLumisection","layer",label,"").c_str());
+  	else layerMEs.LayerClusterWidthTrend=bookMETrend("TH1ClusterWidth", hidmanager.createHistoLayer("Trend_ClusterWidth","layer",label,"").c_str());
     }
   }
 
@@ -899,8 +899,8 @@ void SiStripMonitorCluster::createLayerMEs(std::string label, int ndets) {
   if(layerswitchclusnoiseon) {
     layerMEs.LayerClusterNoise=bookME1D("TH1ClusterNoise", hidmanager.createHistoLayer("Summary_ClusterNoise","layer",label,"").c_str());
     if (createTrendMEs) {
-	if(TrendsVsLS) layerMEs.LayerClusterNoiseTrend=bookMETrend("TH1ClusterNoise", hidmanager.createHistoLayer("Trend_ClusterNoise","layer",label,"").c_str());
-    	else layerMEs.LayerClusterNoiseTrendLS=bookMETrendLS("TH1ClusterNoise", hidmanager.createHistoLayer("Trend_ClusterNoisevsLumisection","layer",label,"").c_str()); 
+	if(TrendsVsLS) layerMEs.LayerClusterNoiseTrendLS=bookMETrend("TH1ClusterNoise", hidmanager.createHistoLayer("Trend_ClusterNoisevsLumisection","layer",label,"").c_str());
+    	else layerMEs.LayerClusterNoiseTrend=bookMETrend("TH1ClusterNoise", hidmanager.createHistoLayer("Trend_ClusterNoise","layer",label,"").c_str()); 
     }
   }
 
@@ -908,8 +908,8 @@ void SiStripMonitorCluster::createLayerMEs(std::string label, int ndets) {
   if(layerswitchcluschargeon) {
     layerMEs.LayerClusterCharge=bookME1D("TH1ClusterCharge", hidmanager.createHistoLayer("Summary_ClusterCharge","layer",label,"").c_str());
     if (createTrendMEs) {
-	if(TrendsVsLS) layerMEs.LayerClusterChargeTrend=bookMETrend("TH1ClusterCharge", hidmanager.createHistoLayer("Trend_ClusterCharge","layer",label,"").c_str());
-    	else layerMEs.LayerClusterChargeTrendLS=bookMETrendLS("TH1ClusterCharge", hidmanager.createHistoLayer("Trend_ClusterChargevsLumisection","layer",label,"").c_str()); 
+	if(TrendsVsLS) layerMEs.LayerClusterChargeTrendLS=bookMETrend("TH1ClusterCharge", hidmanager.createHistoLayer("Trend_ClusterChargevsLumisection","layer",label,"").c_str());
+    	else layerMEs.LayerClusterChargeTrend=bookMETrend("TH1ClusterCharge", hidmanager.createHistoLayer("Trend_ClusterCharge","layer",label,"").c_str()); 
     }
   }
 
@@ -917,8 +917,8 @@ void SiStripMonitorCluster::createLayerMEs(std::string label, int ndets) {
   if(layerswitchclusstonon) {
     layerMEs.LayerClusterStoN=bookME1D("TH1ClusterStoN", hidmanager.createHistoLayer("Summary_ClusterSignalOverNoise","layer",label,"").c_str());
     if (createTrendMEs) {
-	if(TrendsVsLS) layerMEs.LayerClusterStoNTrend=bookMETrend("TH1ClusterStoN", hidmanager.createHistoLayer("Trend_ClusterSignalOverNoise","layer",label,"").c_str());
-    	else layerMEs.LayerClusterStoNTrendLS=bookMETrendLS("TH1ClusterStoN", hidmanager.createHistoLayer("Trend_ClusterSignalOverNoisevsLumisection","layer",label,"").c_str()); 
+	if(TrendsVsLS) layerMEs.LayerClusterStoNTrendLS=bookMETrend("TH1ClusterStoN", hidmanager.createHistoLayer("Trend_ClusterSignalOverNoisevsLumisection","layer",label,"").c_str());
+    	else layerMEs.LayerClusterStoNTrend=bookMETrend("TH1ClusterStoN", hidmanager.createHistoLayer("Trend_ClusterSignalOverNoise","layer",label,"").c_str()); 
     }
   }
 
@@ -926,8 +926,8 @@ void SiStripMonitorCluster::createLayerMEs(std::string label, int ndets) {
   if(layerswitchlocaloccupancy) {
     layerMEs.LayerLocalOccupancy=bookME1D("TH1ModuleLocalOccupancy", hidmanager.createHistoLayer("Summary_ClusterLocalOccupancy","layer",label,"").c_str());
     if (createTrendMEs) {
-	if(TrendsVsLS) layerMEs.LayerLocalOccupancyTrend=bookMETrend("TH1ModuleLocalOccupancy", hidmanager.createHistoLayer("Trend_ClusterLocalOccupancy","layer",label,"").c_str());
-    	else layerMEs.LayerLocalOccupancyTrendLS=bookMETrendLS("TH1ModuleLocalOccupancy", hidmanager.createHistoLayer("Trend_ClusterLocalOccupancyvsLumisection","layer",label,"").c_str()); 
+	if(TrendsVsLS) layerMEs.LayerLocalOccupancyTrendLS=bookMETrend("TH1ModuleLocalOccupancy", hidmanager.createHistoLayer("Trend_ClusterLocalOccupancyvsLumisection","layer",label,"").c_str());
+    	else layerMEs.LayerLocalOccupancyTrend=bookMETrend("TH1ModuleLocalOccupancy", hidmanager.createHistoLayer("Trend_ClusterLocalOccupancy","layer",label,"").c_str()); 
     }
   }
 
@@ -1164,7 +1164,10 @@ void SiStripMonitorCluster::fillLayerMEsLS(LayerMEs& layerMEs, ClusterProperties
 MonitorElement* SiStripMonitorCluster::bookMETrend(const char* ParameterSetLabel, const char* HistoName)
 {
   Parameters =  conf_.getParameter<edm::ParameterSet>(ParameterSetLabel);
-  edm::ParameterSet ParametersTrend =  conf_.getParameter<edm::ParameterSet>("Trending");
+  edm::ParameterSet ParametersTrend;
+  if (TrendsVsLS) ParametersTrend =  conf_.getParameter<edm::ParameterSet>("TrendingLS");
+  else ParametersTrend =  conf_.getParameter<edm::ParameterSet>("Trending");
+
   MonitorElement* me = dqmStore_->bookProfile(HistoName,HistoName,
 					      ParametersTrend.getParameter<int32_t>("Nbins"),
 					      // 					      0,
@@ -1176,32 +1179,12 @@ MonitorElement* SiStripMonitorCluster::bookMETrend(const char* ParameterSetLabel
 					      ParametersTrend.getParameter<double>("ymax"),
 					      "" );
   if(!me) return me;
-  me->setAxisTitle("Event Time in Seconds",1);
+  if(TrendsVsLS) me->setAxisTitle("Lumisection",1);
+  else me->setAxisTitle("Event Time in Seconds",1);
   if (me->kind() == MonitorElement::DQM_KIND_TPROFILE) me->getTH1()->SetBit(TH1::kCanRebin);
   return me;
 }
 
-
-
-MonitorElement* SiStripMonitorCluster::bookMETrendLS(const char* ParameterSetLabel, const char* HistoName)
-{
-  Parameters =  conf_.getParameter<edm::ParameterSet>(ParameterSetLabel);
-  edm::ParameterSet ParametersTrend =  conf_.getParameter<edm::ParameterSet>("TrendingLS");
-  MonitorElement* me = dqmStore_->bookProfile(HistoName,HistoName,
-					      ParametersTrend.getParameter<int32_t>("Nbins"),
-					      // 					      0,
-					      ParametersTrend.getParameter<double>("xmin"),
-					      ParametersTrend.getParameter<double>("xmax"),
-					      // 					      ParametersTrend.getParameter<int32_t>("Nbins"),
-					      100, //that parameter should not be there !?
-					      ParametersTrend.getParameter<double>("ymin"),
-					      ParametersTrend.getParameter<double>("ymax"),
-					      "" );
-  if(!me) return me;
-  me->setAxisTitle("Lumisection",1);
-  if (me->kind() == MonitorElement::DQM_KIND_TPROFILE) me->getTH1()->SetBit(TH1::kCanRebin);
-  return me;
-}
 
 //------------------------------------------------------------------------------------------
 MonitorElement* SiStripMonitorCluster::bookME1D(const char* ParameterSetLabel, const char* HistoName)
