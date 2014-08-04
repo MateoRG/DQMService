@@ -34,8 +34,10 @@ SiStripMonitorDigi.TH1NStripsApvShots.globalswitchon = True
 SiStripMonitorDigi.TH1ApvNumApvShots.subdetswitchon = True
 SiStripMonitorDigi.TH1ApvNumApvShots.globalswitchon = True
 
-SiStripMonitorDigi.TProfNShotsVsTime.subdetswitchon = True
-SiStripMonitorDigi.TProfNShotsVsTime.globalswitchon = True
+#SiStripMonitorDigi.TProfNShotsVsTime.subdetswitchon = True
+#SiStripMonitorDigi.TProfNShotsVsTime.globalswitchon = True
+SiStripMonitorDigi.TProfNShotsVsLS.subdetswitchon = True 
+SiStripMonitorDigi.TProfNShotsVsLS.globalswitchon = True 
 
 SiStripMonitorDigi.TProfGlobalNShots.globalswitchon = True
 
@@ -44,7 +46,7 @@ from DQM.SiStripMonitorCluster.SiStripMonitorCluster_cfi import *
 SiStripMonitorCluster.Mod_On = False
 SiStripMonitorCluster.TProfClustersApvCycle.subdetswitchon = True
 #SiStripMonitorCluster.TProfTotalNumberOfClusters.subdetswitchon = True
-SiStripMonitorCluster.TProfTotalNumberOfClustersLS.subdetswitchon = True
+SiStripMonitorCluster.TProfTotalNumberOfClustersLS.subdetswitchon = True 
 SiStripMonitorCluster.TH2CStripVsCpixel.globalswitchon=False
 SiStripMonitorCluster.TH1MultiplicityRegions.globalswitchon=False
 SiStripMonitorCluster.TH1MainDiagonalPosition.globalswitchon=False
