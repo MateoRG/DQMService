@@ -156,7 +156,7 @@ SiStripMonitorDigi::SiStripMonitorDigi(const edm::ParameterSet& iConfig) :
   edm::ParameterSet ParametersGlobalNApvShotsTimeProf = conf_.getParameter<edm::ParameterSet>("TProfNShotsVsTime");
   globalswitchapvshotsonprof = ParametersGlobalNApvShotsTimeProf.getParameter<bool>("globalswitchon");
 
-  edm::ParameterSet ParametersGlobalNApvShotsLSProfGlobalNApvShotsTimeProfVsLS = conf_.getParameter<edm::ParameterSet>("TProfNShotsVsLS"); 
+  edm::ParameterSet ParametersGlobalNApvShotsLSProf = conf_.getParameter<edm::ParameterSet>("TProfNShotsVsLS"); 
   globalswitchapvshotsonprofls = ParametersGlobalNApvShotsLSProf.getParameter<bool>("globalswitchon");
 
 
