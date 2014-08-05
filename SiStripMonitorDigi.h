@@ -89,6 +89,7 @@ class SiStripMonitorDigi : public edm::EDAnalyzer {
     MonitorElement* SubDetChargeMedianApvShotsTH1;
     MonitorElement* SubDetNStripsApvShotsTH1;
     MonitorElement* SubDetNApvShotsProf; 
+    MonitorElement* SubDetNApvShotsProfVsLS;
     MonitorElement* SubDetNApvShotsNApvTH1;
   };
 
