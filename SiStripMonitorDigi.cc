@@ -156,8 +156,8 @@ SiStripMonitorDigi::SiStripMonitorDigi(const edm::ParameterSet& iConfig) :
   edm::ParameterSet ParametersGlobalNApvShotsTimeProf = conf_.getParameter<edm::ParameterSet>("TProfNShotsVsTime");
   globalswitchapvshotsonprof = ParametersGlobalNApvShotsTimeProf.getParameter<bool>("globalswitchon");
 
-  edm::ParameterSet ParametersGlobalNApvShotsTimeProfVsLS = conf_.getParameter<edm::ParameterSet>("TProfNShotsVsLS"); 
-  globalswitchapvshotsonprofls = ParametersGlobalNApvShotsTimeProfVsLS.getParameter<bool>("globalswitchon");
+  edm::ParameterSet ParametersGlobalNApvShotsLSProfGlobalNApvShotsTimeProfVsLS = conf_.getParameter<edm::ParameterSet>("TProfNShotsVsLS"); 
+  globalswitchapvshotsonprofls = ParametersGlobalNApvShotsLSProf.getParameter<bool>("globalswitchon");
 
 
   //Digi and APV Shots Maps
@@ -841,7 +841,7 @@ void SiStripMonitorDigi::analyze(const edm::Event& iEvent, const edm::EventSetup
 
       if (subdetswitchnapvshotson ) subdetmes.SubDetNApvShotsTH1->Fill(ShotsSize);// N shots
       if (subdetswitchapvshotsonprof) subdetmes.SubDetNApvShotsProf ->Fill(iOrbitSec,ShotsSize); //N shots vs time 
-      if (subdetswitchapvshotsonprofls) subdetmes.SubDetNApvShotsProf ->Fill(aLS,ShotsSize); //N shots vs Lumisection 
+      if (subdetswitchapvshotsonprofls) subdetmes.SubDetNApvShotsProfVsLS ->Fill(aLS,ShotsSize); //N shots vs Lumisection 
 
       for (uint i=0; i< ShotsSize; ++i){ // Strip multiplicity, charge median and APV number distributions for APV shots
 	
@@ -1136,6 +1136,7 @@ void SiStripMonitorDigi::createSubDetMEs(std::string label) {
   subdetMEs.SubDetChargeMedianApvShotsTH1 = 0;
   subdetMEs.SubDetNStripsApvShotsTH1      = 0;
   subdetMEs.SubDetNApvShotsProf           = 0;
+  subdetMEs.SubDetNApvShotsProfVsLS       = 0;
 
   std::string HistoName;
   
@@ -1283,7 +1284,7 @@ void SiStripMonitorDigi::createSubDetMEs(std::string label) {
   if(subdetswitchapvshotsonprofls){
     edm::ParameterSet Parameters =  conf_.getParameter<edm::ParameterSet>("TProfNShotsVsLS");
     HistoName = "NApv_Shots_vs_Lumisection_" + label;
-    subdetMEs.SubDetNApvShotsProf=dqmStore_->bookProfile(HistoName,HistoName,
+    subdetMEs.SubDetNApvShotsProfVsLS=dqmStore_->bookProfile(HistoName,HistoName,
 						       Parameters.getParameter<int32_t>("Nbins"),
 						       Parameters.getParameter<double>("xmin"),
 						       Parameters.getParameter<double>("xmax"),
@@ -1291,9 +1292,9 @@ void SiStripMonitorDigi::createSubDetMEs(std::string label) {
 						       Parameters.getParameter<double>("ymin"),
 						       Parameters.getParameter<double>("ymax"),
 						       "" );
-    subdetMEs.SubDetNApvShotsProf->setAxisTitle("Lumisection",1);
-    subdetMEs.SubDetNApvShotsProf->setAxisTitle("# Apv Shots",2);
-    if (subdetMEs.SubDetNApvShotsProf->kind() == MonitorElement::DQM_KIND_TPROFILE) subdetMEs.SubDetNApvShotsProf->getTH1()->SetBit(TH1::kCanRebin);
+    subdetMEs.SubDetNApvShotsProfVsLS->setAxisTitle("Lumisection",1);
+    subdetMEs.SubDetNApvShotsProfVsLS->setAxisTitle("# Apv Shots",2);
+    if (subdetMEs.SubDetNApvShotsProfVsLS->kind() == MonitorElement::DQM_KIND_TPROFILE) subdetMEs.SubDetNApvShotsProfVsLS->getTH1()->SetBit(TH1::kCanRebin);
   }
 
 
